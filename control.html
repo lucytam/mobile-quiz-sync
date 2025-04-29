@@ -39,15 +39,15 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-    const firebaseConfig = {
-      apiKey: "你的API",
-      authDomain: "你的PROJECTID.firebaseapp.com",
-      databaseURL: "https://你的PROJECTID-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "你的PROJECTID",
-      storageBucket: "你的PROJECTID.appspot.com",
-      messagingSenderId: "你的SenderID",
-      appId: "你的AppID"
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyBZf74DTboobDRAuiBOOclEBSGYnOv5oQE",
+  authDomain: "mobile-quiz-sync.firebaseapp.com",
+  databaseURL: "https://mobile-quiz-sync-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "mobile-quiz-sync",
+  storageBucket: "mobile-quiz-sync.firebasestorage.app",
+  messagingSenderId: "306475332437",
+  appId: "1:306475332437:web:96a711321096fcd2f5f5dc"
+};
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
