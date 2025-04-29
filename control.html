@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>手機控制 - 輪盤開始</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyBZf74DTboobDRAuiBOOclEBSGYnOv5oQE",
+  authDomain: "mobile-quiz-sync.firebaseapp.com",
+  databaseURL: "https://mobile-quiz-sync-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "mobile-quiz-sync",
+  storageBucket: "mobile-quiz-sync.firebasestorage.app",
+  messagingSenderId: "306475332437",
+  appId: "1:306475332437:web:96a711321096fcd2f5f5dc"
+  };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    function sendStartSignal() {
+      set(ref(db, 'wheelControl/'), {
+        start: true,
+        timestamp: Date.now()
+      });
+      document.getElementById('startButton').disabled = true;
+      alert('已發出開始指令！');
+    }
+    
+    window.sendStartSignal = sendStartSignal;
+  </script>
+</head>
+<body>
+  <h2>按下開始轉動輪盤！</h2>
+  <button id="startButton" onclick="sendStartSignal()">開始</button>
+</body>
+</html>
