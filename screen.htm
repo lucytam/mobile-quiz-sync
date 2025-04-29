@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>大螢幕同步輪盤</title>
+  <style>
+    /* 你原本輪盤CSS保留 */
+  </style>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyBZf74DTboobDRAuiBOOclEBSGYnOv5oQE",
+  authDomain: "mobile-quiz-sync.firebaseapp.com",
+  databaseURL: "https://mobile-quiz-sync-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "mobile-quiz-sync",
+  storageBucket: "mobile-quiz-sync.firebasestorage.app",
+  messagingSenderId: "306475332437",
+  appId: "1:306475332437:web:96a711321096fcd2f5f5dc"
+  };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    function startSpinning() {
+      console.log('開始轉動輪盤！');
+      // 這裡放你原本輪盤動畫代碼
+      // 例如開始隨機閃爍、2.5秒後停等等
+    }
+
+    // 監聽Firebase
+    const wheelControlRef = ref(db, 'wheelControl/');
+    onValue(wheelControlRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data && data.start) {
+        startSpinning();
+        // 一開始後，即刻清除指令，防止重複
+        set(ref(db, 'wheelControl/'), { start: false });
+      }
+    });
+  </script>
+</head>
+<body>
+  <h2>等待開始...</h2>
+  <div id="wheel-container">
+    <!-- 你的輪盤結構放這裡 -->
+  </div>
+</body>
+</html>
