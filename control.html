@@ -3,19 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>手機控制 - 輪盤開始</title>
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: #f0f4f8;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    #startButton {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+    #startButton:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+    #message {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyBZf74DTboobDRAuiBOOclEBSGYnOv5oQE",
-  authDomain: "mobile-quiz-sync.firebaseapp.com",
-  databaseURL: "https://mobile-quiz-sync-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "mobile-quiz-sync",
-  storageBucket: "mobile-quiz-sync.firebasestorage.app",
-  messagingSenderId: "306475332437",
-  appId: "1:306475332437:web:96a711321096fcd2f5f5dc"
-  };
+    const firebaseConfig = {
+      apiKey: "你的API",
+      authDomain: "你的PROJECTID.firebaseapp.com",
+      databaseURL: "https://你的PROJECTID-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "你的PROJECTID",
+      storageBucket: "你的PROJECTID.appspot.com",
+      messagingSenderId: "你的SenderID",
+      appId: "你的AppID"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
@@ -24,16 +56,20 @@
       set(ref(db, 'wheelControl/'), {
         start: true,
         timestamp: Date.now()
+      }).then(() => {
+        document.getElementById('startButton').disabled = true;
+        document.getElementById('message').innerText = "指令已發出，請等待大螢幕結果！";
+      }).catch((error) => {
+        alert("發送失敗：" + error.message);
       });
-      document.getElementById('startButton').disabled = true;
-      alert('已發出開始指令！');
     }
-    
+
     window.sendStartSignal = sendStartSignal;
   </script>
 </head>
 <body>
   <h2>按下開始轉動輪盤！</h2>
   <button id="startButton" onclick="sendStartSignal()">開始</button>
+  <div id="message"></div>
 </body>
 </html>
