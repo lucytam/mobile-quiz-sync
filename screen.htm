@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>智能手機知多少？</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 <style>
@@ -110,12 +111,6 @@
   messagingSenderId: "306475332437",
   appId: "1:306475332437:web:96a711321096fcd2f5f5dc"
   };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    function startSpinning() {
-      console.log('開始轉動輪盤！');
       
 <div id="info">
   <p><strong>主辦：</strong>澳門明愛　　<strong>贊助：</strong>社會工作局</p>
@@ -144,7 +139,13 @@ const questions = [
   "手機支付應用程式有哪些？",
   "WiFi 是甚麼？"
 ];
+    
+ const app = initializeApp(firebaseConfig);
+ const db = getDatabase(app);
 
+function startSpinning() {
+      console.log('開始轉動輪盤！');
+    
 const boxes = document.querySelectorAll('.question-box');
 let spinning = false;
 let interval;
@@ -172,10 +173,7 @@ document.getElementById('startButton').addEventListener('click', () => {
     document.getElementById('questionBox').innerText = questions[finalIndex];
     spinning = false;
   }, 2500);
-});
-</script>
-
-      
+});   
     }
 
     // 監聽Firebase
